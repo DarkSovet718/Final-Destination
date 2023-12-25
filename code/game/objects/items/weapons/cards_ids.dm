@@ -156,6 +156,9 @@ var/const/NO_EMAG_ACT = -50
 	var/dna_hash = "\[UNSET\]"
 	var/fingerprint_hash = "\[UNSET\]"
 	var/sex = "\[UNSET\]"
+	var/ipc_gen = null
+	var/psi_status
+	var/psi_level
 	var/icon/front
 	var/icon/side
 
@@ -221,7 +224,7 @@ var/const/NO_EMAG_ACT = -50
 	if(front && side)
 		send_rsc(user, front, "front.png")
 		send_rsc(user, side, "side.png")
-	var/datum/browser/popup = new(user, "idcard", name, 600, 250)
+	var/datum/browser/popup = new(user, "idcard", name, 600, 300)
 	popup.set_content(dat())
 	popup.set_title_image(usr.browse_rsc_icon(src.icon, src.icon_state))
 	popup.open()
@@ -245,12 +248,15 @@ var/const/NO_EMAG_ACT = -50
 
 	id_card.formal_name_prefix = initial(id_card.formal_name_prefix)
 	id_card.formal_name_suffix = initial(id_card.formal_name_suffix)
-	if(client && client.prefs)
+	if(client?.prefs)
 		for(var/culturetag in client.prefs.cultural_info)
 			var/decl/cultural_info/culture = SSculture.get_culture(client.prefs.cultural_info[culturetag])
 			if(culture)
 				id_card.formal_name_prefix = "[culture.get_formal_name_prefix()][id_card.formal_name_prefix]"
 				id_card.formal_name_suffix = "[id_card.formal_name_suffix][culture.get_formal_name_suffix()]"
+		if(client.prefs.psi_threat_level && client.prefs.psi_openness)
+			id_card.psi_level = client.prefs.psi_threat_level
+			id_card.psi_status = GLOB.psistatus2text[client.prefs.psi_status]
 
 	id_card.registered_name = real_name
 
@@ -273,13 +279,20 @@ var/const/NO_EMAG_ACT = -50
 		id_card.military_branch = char_branch
 	if(GLOB.using_map.flags & MAP_HAS_RANK)
 		id_card.military_rank = char_rank
+	if(is_species(SPECIES_IPC))
+		id_card.ipc_gen = get_cultural_value(TAG_FACTION)
 
 /obj/item/card/id/proc/dat()
 	var/list/dat = list("<table><tr><td>")
 	dat += text("Name: []</A><BR>", "[formal_name_prefix][registered_name][formal_name_suffix]")
 	dat += text("Sex: []</A><BR>\n", sex)
 	dat += text("Age: []</A><BR>\n", age)
+	if(psi_status)
+		dat += "Psionics status: [psi_status]<BR>\n"
+		dat += "Psionics threat level: [psi_level]<BR>\n"
 
+	if(ipc_gen)
+		dat += text("Registration: []</A><BR>\n", ipc_gen)
 	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 		dat += text("Branch: []</A><BR>\n", military_branch ? military_branch.name : "\[UNSET\]")
 	if(GLOB.using_map.flags & MAP_HAS_RANK)
@@ -288,9 +301,12 @@ var/const/NO_EMAG_ACT = -50
 	dat += text("Assignment: []</A><BR>\n", assignment)
 	dat += text("Fingerprint: []</A><BR>\n", fingerprint_hash)
 	dat += text("Blood Type: []<BR>\n", blood_type)
-	dat += text("DNA Hash: []<BR><BR>\n", dna_hash)
+	dat += text("DNA Hash: []<BR>\n", dna_hash)
 	if(front && side)
-		dat +="<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4><img src=side.png height=80 width=80 border=4></td>"
+		dat += "<td align = center valign = top>Photo:<br>"
+		dat += "<img style='image-rendering: pixelated;' src=front.png height=80 width=80 border=4>"
+		dat += "<img style='image-rendering: pixelated;' src=side.png height=80 width=80 border=4>"
+		dat += "</td>"
 	dat += "</tr></table>"
 	return jointext(dat,null)
 
@@ -483,6 +499,21 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/card/id/foundation/New()
 	..()
 	access |= get_all_station_access()
+
+/obj/item/card/id/bureua
+	name = "\improper Bureua 12 warrant card"
+	desc = "A warrant card in a handsome leather case."
+	icon_state = "warrantcard"
+	job_access_type = /datum/job/submap/aaaa_head/agent/aegis
+
+/obj/item/card/id/bureua/on_update_icon()
+	return
+
+/obj/item/card/id/bureua/leader
+	name = "\improper Bureua 12 warrant card"
+	desc = "A warrant card in a handsome leather case."
+	icon_state = "warrantcard"
+	job_access_type = /datum/job/submap/aaaa_head/agent/leader/aegis
 
 /obj/item/card/id/all_access
 	name = "\improper Administrator's spare ID"

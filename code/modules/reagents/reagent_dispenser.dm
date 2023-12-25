@@ -55,15 +55,15 @@
 
 /obj/structure/reagent_dispensers/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(600 to INFINITY)
 			qdel(src)
 			return
-		if(2.0)
+		if(300 to 600)
 			if (prob(50))
 				new /obj/effect/effect/water(src.loc)
 				qdel(src)
 				return
-		if(3.0)
+		if(150 to 300)
 			if (prob(5))
 				new /obj/effect/effect/water(src.loc)
 				qdel(src)
@@ -239,7 +239,7 @@
 
 /obj/structure/reagent_dispensers/fueltank/proc/explode()
 	for(var/datum/reagent/R in reagents.reagent_list)
-		R.ex_act(src, 1)
+		R.ex_act(1, null, get_turf(src))
 	qdel(src)
 
 /obj/structure/reagent_dispensers/fueltank/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)

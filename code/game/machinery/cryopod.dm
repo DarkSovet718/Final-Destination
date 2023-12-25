@@ -233,7 +233,7 @@
 		newz = pick(possible_locations)
 	var/turf/nloc = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),newz)
 	if(!istype(nloc, /turf/space))
-		explosion(nloc, 6)
+		cell_explosion(nloc, 200, 10)
 	playsound(loc,'sound/effects/rocket.ogg',100)
 	forceMove(nloc)
 
@@ -596,6 +596,7 @@
 	var/closed = 1
 	var/busy = 0
 	var/remains_type = /obj/item/remains/human
+	var/spawn_chance = 50
 
 /obj/structure/broken_cryo/attack_hand(mob/user)
 	..()
@@ -621,5 +622,24 @@
 			icon_state = "broken_cryo_open"
 			var/obj/dead = new remains_type(loc)
 			dead.dir = src.dir//skeleton is oriented as cryo
+			if(prob(spawn_chance))
+				new /obj/random/clothing(loc)
+			if(prob(spawn_chance))
+				new /obj/random/accessory(loc)
+			if(prob(spawn_chance))
+				new /obj/random/gloves(loc)
+			if(prob(spawn_chance))
+				new /obj/random/shoes(loc)
+			if(prob(spawn_chance))
+				var/rare_spawn = spawn_chance - 30
+				if(rare_spawn << 0)
+					rare_spawn = 0
+				if(prob(rare_spawn))
+					new /obj/random/glasses(loc)
+				if(prob(rare_spawn))
+					new /obj/random/plushie(loc)
+				if(prob(rare_spawn))
+					new /obj/random/suit(loc)
+
 	else
 		to_chat(user, "<span class='notice'>The glass cover is already open.</span>")

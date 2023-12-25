@@ -1,6 +1,7 @@
 /datum/trader
 	var/name = "unsuspicious trader"                            //The name of the trader in question
 	var/origin = "some place"                                   //The place that they are trading from
+	var/skill_req = SKILL_FINANCE                           //Skill related insults/compliment
 	var/list/possible_origins                                   //Possible names of the trader origin
 	var/list/disposition = list()                               //The current disposition of them to us.
 	var/trade_flags = TRADER_MONEY                              //Flags
@@ -90,22 +91,28 @@
 		disposition += possible_trading_visitables
 		disposition[possible_trading_visitables] = 0
 
-/datum/trader/proc/generate_overmap_representation()
+/datum/trader/proc/select_spawn_location()
 	var/list/map_turfs = block(locate(2,2,GLOB.using_map.overmap_z),locate(GLOB.using_map.overmap_size-2,GLOB.using_map.overmap_size-2,GLOB.using_map.overmap_z))
-	var/turf/spawn_location
 
 	for(var/turf/T in shuffle(map_turfs))
 		var/valid = TRUE
 		for(var/obj/effect/overmap/event/E in T)
-			if(E) valid = FALSE
+			if(E)
+				valid = FALSE
+				break
 		for(var/obj/effect/overmap/trading/M in T)
-			if(M) valid = FALSE
+			if(M)
+				valid = FALSE
+				break
 		for(var/obj/effect/overmap/visitable/V)
-			if(T in view(7,V)) valid = FALSE
+			if(T in view(7, V))
+				valid = FALSE
+				break
 		if(valid)
-			spawn_location = T
-			break
-		else continue
+			return T
+
+/datum/trader/proc/generate_overmap_representation()
+	var/turf/spawn_location = select_spawn_location()
 
 	if(!spawn_location)
 		log_and_message_admins("КРИНЖАНУЛ, НЕГДЕ СПАВНИТЬ ТОРГОВЦА!!!")
@@ -264,19 +271,23 @@
 		return FALSE
 	return TRUE
 
-/datum/trader/proc/insult(ship_z)
-	disposition[map_sectors["[ship_z]"]] -= rand(insult_drop, insult_drop * 2)
-	if(disposition[map_sectors["[ship_z]"]] > 50)
+/datum/trader/proc/insult(ship_z, mob/user)
+	var/randed = rand(insult_drop * max(0.1, user.get_skill_value(skill_req) * 0.2), insult_drop * max(1, user.get_skill_value(skill_req) * 1.5))
+	disposition[map_sectors["[ship_z]"]] -= randed
+	if(randed > insult_drop * 2)
 		return make_response(TRADER_INSULT_GOOD,"What? I thought we were cool!", 0, TRUE)
 	else
+		disposition[map_sectors["[ship_z]"]] -= randed * 0.5
 		return make_response(TRADER_INSULT_BAD, "Right back at you asshole!", 0, FALSE)
 
-/datum/trader/proc/compliment(ship_z)
-	if(prob(-disposition[map_sectors["[ship_z]"]]))
+/datum/trader/proc/compliment(ship_z, mob/user)
+	var/randed = rand(compliment_increase * max(0.1, user.get_skill_value(skill_req) * 0.2), compliment_increase * max(1, user.get_skill_value(skill_req) * 1.5))
+	if(randed < compliment_increase * 2)
+		disposition[map_sectors["[ship_z]"]] -= randed * 0.5
 		return make_response(TRADER_COMPLEMENT_FAILURE, "Fuck you!", 0, FALSE)
-	if(prob(100-disposition[map_sectors["[ship_z]"]]))
-		disposition[map_sectors["[ship_z]"]] += rand(compliment_increase, compliment_increase * 2)
-	return make_response(TRADER_COMPLEMENT_SUCCESS, "Thank you!", 0, TRUE)
+	else
+		disposition[map_sectors["[ship_z]"]] += randed
+		return make_response(TRADER_COMPLEMENT_SUCCESS, "Thank you!", 0, TRUE)
 
 /datum/trader/proc/trade_quantity(quantity, list/offers, num, turf/location)
 	for(var/offer in offers)

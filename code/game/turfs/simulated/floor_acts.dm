@@ -1,9 +1,10 @@
-/turf/simulated/floor/ex_act(severity)
-	//set src in oview(1)
+/turf/simulated/floor/ex_act(severity, derection)
 	switch(severity)
-		if(1.0)
-			src.ChangeTurf(get_base_turf_by_area(src))
-		if(2.0)
+		if(150 to 300)
+			if (prob(50))
+				src.break_tile()
+				src.hotspot_expose(1000,CELL_VOLUME)
+		if(300 to 600)
 			switch(pick(40;1,40;2,3))
 				if (1)
 					if(prob(33)) new /obj/item/stack/material/steel(src)
@@ -17,10 +18,8 @@
 					else
 						src.break_tile()
 					src.hotspot_expose(1000,CELL_VOLUME)
-		if(3.0)
-			if (prob(50))
-				src.break_tile()
-				src.hotspot_expose(1000,CELL_VOLUME)
+		if(600 to INFINITY)
+			src.ChangeTurf(get_base_turf_by_area(src))
 	return
 
 /turf/simulated/floor/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)

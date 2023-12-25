@@ -50,7 +50,7 @@
 	name = "price scanner"
 	desc = "Using an up-to-date database of various costs and prices, this device estimates the market price of an item up to 0.001% accuracy."
 	id = "price_scanner"
-	req_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 4)
+	req_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_DATA = 2)
 	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 3000, MATERIAL_SILVER = 250)
 	build_path = /obj/item/device/scanner/price
 	sort_string = "VAGAF"
@@ -68,7 +68,7 @@
 	name = "portable shield diffuser"
 	desc = "A small handheld device designed to disrupt energy barriers."
 	id = "portable_shield_diffuser"
-	req_tech = list(TECH_MAGNET = 5, TECH_POWER = 5, TECH_ESOTERIC = 2)
+	req_tech = list(TECH_MAGNET = 5, TECH_POWER = 6, TECH_ESOTERIC = 3)
 	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 5000, MATERIAL_GOLD = 2000, MATERIAL_SILVER = 2000)
 	build_path = /obj/item/shield_diffuser
 	sort_string = "VAGAH"
@@ -100,3 +100,36 @@
 	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 6000, MATERIAL_ALUMINIUM = 4000, MATERIAL_PHORON = 4000)
 	build_path = /obj/item/weldingtool/electric
 	sort_string = "VAGAK"
+
+/datum/design/item/tool/searcher
+	name = "Intel searching device"
+	desc = "A device that used to scan location for valuable intel or other odd things."
+	id = "searcher"
+	req_tech = list(TECH_ENGINEERING = 5, TECH_MAGNET = 3)
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 3000)
+	build_path = /obj/item/device/fd/searcher
+	sort_string = "VAGAL"
+
+/datum/design/item/tool/flashlight
+	desc = "An energy efficient flashlight."
+	id = "flashlight"
+	req_tech = list(TECH_ENGINEERING = 3, TECH_MAGNET = 3, TECH_POWER = 2)
+	materials = list(MATERIAL_STEEL = 500, MATERIAL_GLASS = 100, MATERIAL_ALUMINIUM = 200)
+	build_path = /obj/item/device/flashlight/upgraded
+	sort_string = "VAGAM"
+
+/datum/design/item/tool/paint
+	desc = "A slender and none-too-sophisticated device capable of applying paint on floors, walls, exosuits and certain airlocks."
+	id = "paint"
+	req_tech = list(TECH_ENGINEERING = 3, TECH_MAGNET = 3)
+	materials = list(MATERIAL_STEEL = 800, MATERIAL_ALUMINIUM = 1000)
+	build_path = /obj/item/device/paint_sprayer
+	sort_string = "VAGAN"
+
+/datum/design/item/tool/solar
+	desc = "A solar panel assembly kit, allows constructions of a solar panel, or with a tracking circuit board, a solar tracker."
+	id = "solar"
+	req_tech = list(TECH_ENGINEERING = 5, TECH_POWER = 5)
+	materials = list(MATERIAL_STEEL = 4000, MATERIAL_ALUMINIUM = 3000)
+	build_path = /obj/item/solar_assembly
+	sort_string = "VAGAO"

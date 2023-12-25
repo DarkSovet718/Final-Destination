@@ -11,7 +11,16 @@
 	force_multiplier = 0.2
 	sharp = TRUE
 	edge = TRUE
+	have_stances = TRUE
+	lunge_dist = 4
+	melee_strikes = list(/datum/melee_strike/swipe_strike/sword_slashes,/datum/melee_strike/swipe_strike/mixed_combo)
 	attack_verb = list("stabbed", "sliced", "cut")
+
+/obj/item/material/armblade/attack(mob/living/M, mob/living/user, target_zone, animate = TRUE)
+	if(!isnull(melee_strike) && !user.skill_check(SKILL_COMBAT, SKILL_EXPERIENCED) && prob(src.fail_chance))
+		return 1
+
+	. = ..()
 
 
 /obj/item/organ/internal/augment/active/item/armblade
@@ -19,6 +28,7 @@
 	desc = "A sturdy housing for a steel utility blade."
 	action_button_name = "Deploy blade"
 	icon_state = "armblade"
+	origin_tech = list(TECH_COMBAT = 3)
 	augment_slots = AUGMENT_ARM
 	item = /obj/item/material/armblade
 	augment_flags = AUGMENT_MECHANICAL | AUGMENT_SCANNABLE
@@ -29,6 +39,7 @@
 	name = "combat claws"
 	desc = "These do not grow back."
 	base_parry_chance = 40
+	melee_strikes = list(/datum/melee_strike/precise_strike/fast_attacks)
 	force_multiplier = 0.3
 
 
@@ -38,6 +49,7 @@
 	action_button_name = "Deploy claws"
 	icon_state = "wolverine"
 	augment_slots = AUGMENT_HAND
+	origin_tech = list(TECH_COMBAT = 3)
 	item = /obj/item/material/armblade/claws
 	augment_flags = AUGMENT_MECHANICAL | AUGMENT_SCANNABLE
 
@@ -50,7 +62,7 @@
 	icon_state = "armblade"
 	augment_slots = AUGMENT_ARM
 	item = /obj/item/material/armblade/wrist
-	origin_tech = list(TECH_COMBAT = 3, TECH_ESOTERIC = 4)
+	origin_tech = list(TECH_COMBAT = 6, TECH_ESOTERIC = 6)
 	deploy_sound = 'sound/effects/holster/sheathout.ogg'
 	retract_sound = 'sound/effects/holster/sheathin.ogg'
 	augment_flags = AUGMENT_MECHANICAL | AUGMENT_BIOLOGICAL
@@ -64,6 +76,7 @@
 	base_parry_chance = 0
 	force_multiplier = 0.2
 	attack_cooldown_modifier = -1
+	melee_strikes = list(/datum/melee_strike/precise_strike/fast_attacks,/datum/melee_strike/swipe_strike/harrying_strike)
 	default_material = MATERIAL_PLASTEEL
 
 	/// SMALL prevents dismembering limbs - only hands & feet

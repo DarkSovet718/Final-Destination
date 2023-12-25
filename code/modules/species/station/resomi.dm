@@ -1,13 +1,13 @@
 /datum/species/resomi
 	name = SPECIES_RESOMI
 	name_plural = "Resomii"
-	description = "A race of feathered raptors who developed on a cold world. \
+	description = "A race of feathered raptors who developed in a cold world. \
 	Extremely fragile, they developed hunting skills that emphasized taking \
-	out their prey without themselves getting hit. They are an pretty new species, \
-	opened by humans."
+	out their prey without themselves getting hit. They are pretty new species, \
+	discovered by humans."
 
 	min_age = 15
-	max_age = 45
+	max_age = 65
 	hidden_from_codex = FALSE
 	health_hud_intensity = 3
 
@@ -32,7 +32,7 @@
 
 	slowdown = -0.8 //speed fix?
 
-	darksight_range = 2
+	darksight_range = 6
 	darksight_tint = DARKTINT_GOOD
 	flash_mod = 2
 	total_health = 150
@@ -42,9 +42,9 @@
 	mob_size = MOB_SMALL
 	holder_type = /obj/item/holder/human
 	light_sensitive = 6
-	gluttonous = GLUT_TINY
 	blood_volume = 280
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.5
+	thirst_factor = DEFAULT_THIRST_FACTOR * 1.3
 	taste_sensitivity = TASTE_SENSITIVE
 	pulse_rate_mod = 1.5
 	body_temperature = 314.15
@@ -105,7 +105,8 @@
 
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/resomi_sonar_ping,
-		/mob/living/proc/toggle_pass_table
+		/mob/living/proc/toggle_pass_table,
+		/mob/proc/switch_tail_layer
 		)
 
 	descriptors = list(
@@ -115,8 +116,11 @@
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(
-			CULTURE_RESOMI_TRIBE,
-			CULTURE_RESOMI_CONCORD,
+			CULTURE_RESOMI_TEMALI,
+			CULTURE_RESOMI_SHAYAMI,
+			CULTURE_RESOMI_SHOSHONI,
+			CULTURE_RESOMI_ATARI,
+			CULTURE_RESOMI_OTHER,
 			CULTURE_RESOMI_SPACER,
 			CULTURE_OTHER
 		),
@@ -125,9 +129,9 @@
 			HOME_SYSTEM_OTHER
 		),
 		TAG_FACTION = list(
-			FACTION_RESOMI_URI,
+			FACTION_RESOMI_URE,
 			FACTION_RESOMI_CONCORD,
-			FACTION_RESOMI_REFUGEE,
+			FACTION_RESOMI_INDEPENDENT,
 			FACTION_EXPEDITIONARY,
 			FACTION_OTHER
 		),
@@ -135,6 +139,8 @@
 			RELIGION_OTHER
 		)
 	)
+
+	species_bonus = 2
 
 /datum/species/resomi/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
@@ -145,7 +151,7 @@
 
 /datum/species/resomi/skills_from_age(age)
 	switch(age)
-		if(0 to 17)		. = -4
+		if(0 to 17)		. = -2
 		if(18 to 25)	. = 0
 		if(26 to 35)	. = 4
-		else			. = 8
+		else			. = 0

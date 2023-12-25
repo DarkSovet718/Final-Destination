@@ -34,11 +34,11 @@
 	damage = 15
 	icon_state = "plasma_bolt"
 	color = "#c40eed"
-	var/explosion_radius = 2
-	var/explosion_max_power = EX_ACT_LIGHT
+	var/explosion_power = 150
+	var/explosion_falloff = 50
 
 /obj/item/projectile/psi/strong/on_hit(var/atom/target, var/blocked = 0)
-	explosion(get_turf(target), explosion_radius, explosion_max_power)
+	cell_explosion(get_turf(target), explosion_power, explosion_falloff)
 	..()
 
 /decl/psionic_power/psychoballistics/spit/invoke(var/mob/living/user, var/mob/living/target)
@@ -121,11 +121,9 @@
 /mob/proc/fragmentate(var/turf/T=get_turf(src), var/fragment_number = 30, var/spreading_range = 5, var/list/fragtypes=list(/obj/item/projectile/))
 	set waitfor = 0
 	var/list/target_turfs = getcircle(T, spreading_range)
-
 	for(var/turf/O in target_turfs)
 		sleep(0)
 		var/fragment_type = pickweight(fragtypes)
 		var/obj/item/projectile/P = new fragment_type(T)
 		P.shot_from = src.name
-
 		P.launch(O)

@@ -56,14 +56,14 @@
 	if(current_size == STAGE_SUPER)//IT'S UNSTOPPABLE
 		return
 	switch(severity)
-		if(1.0)
+		if(600 to INFINITY)
 			if(prob(25))
 				investigate_log("has been destroyed by an explosion.", I_SINGULO)
 				qdel(src)
 				return
 			else
 				energy += 50
-		if(2.0 to 3.0)
+		if(300 to 600)
 			energy += round((rand(20,60)/2),1)
 			return
 
@@ -342,10 +342,10 @@
 	var/dir2 = 0
 	var/dir3 = 0
 	switch(direction)
-		if(NORTH||SOUTH)
+		if(NORTH, SOUTH)
 			dir2 = 4
 			dir3 = 8
-		if(EAST||WEST)
+		if(EAST, WEST)
 			dir2 = 1
 			dir3 = 2
 	var/turf/T2 = T
@@ -481,7 +481,7 @@
 	if(current_size <= size)
 		var/gain = (energy/2)
 		var/dist = max((current_size - 2), 1)
-		explosion(src.loc, dist * 7)
+		cell_explosion(loc, dist * 7 * 50, 50)
 		spawn(0)
 			qdel(src)
 		return gain

@@ -127,10 +127,11 @@
 /obj/machinery/barrier/ex_act(severity)
 	if (QDELETED(src))
 		return
-	if (severity == 1)
-		explode()
-	else if (severity == 2)
-		modify_health(-25)
+	switch(severity)
+		if(150 to 600)
+			modify_health(-severity)
+		if(600 to INFINITY)
+			explode()
 
 /obj/machinery/barrier/emp_act(severity)
 	if (severity > 2)
@@ -155,5 +156,5 @@
 	qdel(src)
 	new /obj/item/stack/material/rods(T, rand(1, 4))
 	new /obj/item/stack/material/steel(T, rand(1, 4))
-	explosion(T, 2, EX_ACT_LIGHT)
+	cell_explosion(T, 50, 10)
 	sparks(3, 1, T)

@@ -84,6 +84,9 @@
 	applies_material_colour = 0
 	worth_multiplier = 31
 	base_parry_chance = 15
+	fail_chance = 60
+	have_stances = TRUE
+	melee_strikes = list(/datum/melee_strike/swipe_strike/polearm_slash, /datum/melee_strike/swipe_strike/polearm_wide)
 
 /obj/item/material/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
 	if(!proximity) return
@@ -100,6 +103,90 @@
 
 /obj/item/material/twohanded/fireaxe/ishatchet()
 	return TRUE
+
+/obj/item/material/twohanded/sledgehammer	// Someone thinks that crossbows and summer go well together.
+	icon = 'icons/obj/weapons/melee_physical.dmi'
+	icon_state = "breacher0"
+	base_icon = "breacher"
+	name = "sledgehammer"
+	desc = "A huge sledgehammer that can punch through walls and is especially good at pork chops. Holding it in your hands, you get obsessive thoughts."
+
+	max_force = 70			//for wielded
+	w_class = ITEM_SIZE_LARGE
+	force_multiplier = 1.4
+	throwforce = 15
+	hitsound = 'sound/weapons/genhit3.ogg'
+	unwielded_force_divisor = 0.3
+	attack_cooldown_modifier = 9
+	default_material = MATERIAL_TITANIUM
+	sharp = FALSE
+	edge = FALSE
+	attack_verb = list("attacked", "smited", "cleaved", "whacked", "slammed")
+	applies_material_colour = 0
+	worth_multiplier = 34
+	base_parry_chance = 5
+	slowdown_general = 0.1
+	wielded_parry_bonus = 20
+	fail_chance = 50
+
+	unbreakable = TRUE		// go ahead, try it
+	have_stances = FALSE
+	//melee_strikes = list(/datum/melee_strike/precise_strike, /datum/melee_strike/blunt_strike)
+
+/obj/item/material/twohanded/sledgehammer/shatter()
+	return
+
+/obj/item/material/twohanded/sledgehammer/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
+	if(!proximity) return
+	..()
+	if(A && wielded)
+		if(istype(A,/obj/structure/window)) //windows
+			var/obj/structure/window/W = A
+			W.shatter()
+
+		else if(istype(A,/obj/structure/grille))
+			qdel(A)
+
+		else if(istype(A,/obj/machinery/suit_storage_unit)) //suit storage unit
+			var/obj/machinery/suit_storage_unit/S = A
+			if(prob(10) && !S.isopen)
+				to_chat(user, "<span class='danger'>You critically damaged and made \the [A] open up.</span>")
+				user.do_attack_animation(src)
+				playsound(src, 'sound/weapons/smash.ogg', 50, 0)
+				S.islocked = FALSE
+				S.isopen = TRUE
+				S.update_icon()
+			else if(!S.isopen)
+				to_chat(user, "<span class='danger'>You hit \the [A], but it doesn't give in.</span>")
+				user.do_attack_animation(src)
+				playsound(src, 'sound/weapons/smash.ogg', 50, 0)
+
+		else if(istype(A,/obj/machinery/door/airlock)) //airlocks
+			if(prob(40))
+				var/obj/machinery/door/airlock/S = A
+				to_chat(user, "<span class='danger'>You critically damaged \the [A]!</span>")
+				user.do_attack_animation(src)
+				if(S.health <= 0)
+					S.health = 0
+				else
+					S.health /= 4
+
+		else if(istype(A,/obj/machinery/door/firedoor)) //firedoor
+			var/obj/machinery/door/firedoor/S = A
+			if(prob(40) && S.density)
+				to_chat(user, "<span class='danger'>You smash through \the [A]!</span>")
+				qdel(A)
+
+		else if(istype(A,/obj/structure/wall_frame) && !istype(A,/obj/structure/wall_frame/invincible)) //wallframe
+			qdel(A)
+
+		else if(istype(A,/turf/simulated/wall) && !istype(A,/turf/simulated/wall/r_wall/invincible)) //walls
+			if(prob(30))
+				to_chat(user, "<span class='danger'>You smash through \the [A]!</span>")
+				user.do_attack_animation(src)
+				A.health_current /= 4
+				//A.kill_health()
+				//A.dismantle_wall()
 
 //spears, bay edition
 /obj/item/material/twohanded/spear
@@ -121,33 +208,17 @@
 	does_spin = FALSE
 	worth_multiplier = 7
 	base_parry_chance = 30
+	lunge_dist = 4
+	lunge_delay = 10 SECONDS
+	fail_chance = 60
+	have_stances = TRUE
+	melee_strikes = list(/datum/melee_strike/swipe_strike/polearm_mixed,/datum/melee_strike/swipe_strike/polearm_slash, /datum/melee_strike/swipe_strike/polearm_wide)
 
 /obj/item/material/twohanded/spear/shatter(var/consumed)
 	if(!consumed)
 		new /obj/item/stack/material/rods(get_turf(src), 1)
 		new /obj/item/stack/cable_coil(get_turf(src), 3)
 	..()
-
-/obj/item/material/twohanded/spear/chichi
-	icon_state = "spearresomi0"
-	base_icon = "spearresomi"
-	name = "wooden spear"
-	desc = "A deadly weapon, shaped and engraved with unic style of resomi culture in it."
-	default_material = MATERIAL_ALUMINIUM
-
-/obj/item/material/twohanded/spear/shatter(var/consumed)
-	return
-
-/obj/item/material/twohanded/spear/chichi/get_mob_overlay(var/mob/living/carbon/human/user, var/slot)
-	if(istype(user) && (slot == slot_l_hand_str || slot == slot_r_hand_str))
-		var/bodytype = user.species.get_bodytype(user)
-		if(slot == slot_l_hand_str)
-			if(bodytype == SPECIES_RESOMI)
-				return overlay_image('icons/mob/species/resomi/spear_l.dmi',  item_state_slots[slot_l_hand_str], color, RESET_COLOR)
-		else if(slot == slot_r_hand_str)
-			if(bodytype == SPECIES_RESOMI)
-				return overlay_image('icons/mob/species/resomi/spear_r.dmi', item_state_slots[slot_r_hand_str], color, RESET_COLOR)
-	. = ..(user, slot)
 
 /obj/item/material/twohanded/baseballbat
 	name = "bat"
@@ -167,6 +238,11 @@
 	attack_cooldown_modifier = 1
 	melee_accuracy_bonus = -10
 	base_parry_chance = 30
+	lunge_dist = 2
+	lunge_delay = 10 SECONDS
+	fail_chance = 40
+	have_stances = TRUE
+	melee_strikes = list(/datum/melee_strike/swipe_strike/blunt_swing/mixed_combo,/datum/melee_strike/swipe_strike/blunt_swing/wide)
 
 //Predefined materials go here.
 /obj/item/material/twohanded/baseballbat/metal/New(var/newloc)

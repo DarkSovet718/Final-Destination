@@ -122,14 +122,14 @@
 
 /obj/machinery/vending/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(600 to INFINITY)
 			qdel(src)
 			return
-		if(2.0)
+		if(300 to 600)
 			if (prob(50))
 				qdel(src)
 				return
-		if(3.0)
+		if(150 to 300)
 			if (prob(25))
 				spawn(0)
 					src.malfunction()
@@ -646,7 +646,8 @@
 					/obj/item/reagent_containers/food/drinks/bottle/premiumvodka = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/patron = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/goldschlager = 5,
-					/obj/item/reagent_containers/food/drinks/bottle/lordaniawine = 5,
+					/obj/item/reagent_containers/food/drinks/bottle/tadmorwine = 5,
+					/obj/item/reagent_containers/food/drinks/bottle/pinebrew = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/brandy = 5)
 	vend_delay = 15
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.

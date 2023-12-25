@@ -43,7 +43,7 @@
 /obj/item/plastique/afterattack(atom/movable/target, mob/user, flag)
 	if (!flag)
 		return
-	if (ismob(target) || istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/storage/) || istype(target, /obj/item/clothing/accessory/storage/) || istype(target, /obj/item/clothing/under))
+	if (ismob(target) || istype(target, /turf/unsimulated) || istype(target, /turf/simulated/wall/r_wall/invincible) || istype(target, /obj/structure/window/reinforced/crescent) || istype(target, /obj/structure/wall_frame/invincible) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/storage/) || istype(target, /obj/item/clothing/accessory/storage/) || istype(target, /obj/item/clothing/under))
 		return
 	to_chat(user, "Planting explosives...")
 	user.do_attack_animation(target)
@@ -72,7 +72,7 @@
 	if(!target)
 		target = src
 	if(location)
-		explosion(location, 2, EX_ACT_LIGHT)
+		cell_explosion(location, 150, 75)
 
 	if(target)
 		if (istype(target, /turf/simulated/wall))

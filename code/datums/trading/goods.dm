@@ -48,6 +48,7 @@
 /datum/trader/ship/electronics
 	name = "Продавец магазина электроники"
 	name_language = TRADER_DEFAULT_NAME
+	skill_req = SKILL_COMPUTER
 	origin = "Магазин Электроники"
 	possible_origins = list("Лучшее по Скидке", "Перегрузка", "Старое Яйцо", "Цитадель Плат", "Синтетическая Деревня", "Позитронное Решение", "Корпорация Санволт.")
 
@@ -88,6 +89,7 @@
 								/obj/item/cell/high                               = TRADER_THIS_TYPE,
 								/obj/item/cell/super                              = TRADER_THIS_TYPE,
 								/obj/item/cell/hyper                              = TRADER_THIS_TYPE,
+								/obj/item/mag_table_plate      = TRADER_THIS_TYPE,
 								/obj/item/module                                  = TRADER_SUBTYPES_ONLY,
 								/obj/item/tracker_electronics                     = TRADER_THIS_TYPE,
 								/obj/item/device/flashlight              = TRADER_ALL,
@@ -230,16 +232,20 @@ Sells devices, odds and ends, and medical stuff
 	name = "Наркодиллер"
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Наркопритон"
+	skill_req = SKILL_CHEMISTRY
 	possible_origins = list("Карнавал чувств", "CBT", "Отвал башки", "Доктор Стоун", "Страна развлечений МакМаффина")
 	possible_trading_items = list(/obj/item/device/kit/paint                 = TRADER_SUBTYPES_ONLY,
 
-								/obj/item/device/paint_sprayer             = TRADER_THIS_TYPE,
-								/obj/item/device/megaphone                 = TRADER_THIS_TYPE,
-								/obj/item/device/scanner/health            = TRADER_THIS_TYPE,
-								/obj/item/reagent_containers/syringe/drugs            = TRADER_THIS_TYPE,
+								/obj/item/device/paint_sprayer                                  = TRADER_THIS_TYPE,
+								/obj/item/device/megaphone                                      = TRADER_THIS_TYPE,
+								/obj/item/device/scanner/health                                 = TRADER_THIS_TYPE,
+								/obj/item/reagent_containers/syringe/drugs                      = TRADER_THIS_TYPE,
+								/obj/item/storage/pill_bottle/three_eye                         = TRADER_THIS_TYPE,
+								/obj/item/storage/pill_bottle/zoom                              = TRADER_THIS_TYPE,
+								/obj/item/reagent_containers/glass/beaker/vial/random           = TRADER_THIS_TYPE,
 								/obj/item/reagent_containers/food/snacks/grown/ambrosiavulgaris = TRADER_THIS_TYPE,
-								/obj/item/reagent_containers/food/snacks/grown/ambrosiadeus = TRADER_THIS_TYPE,
-								/obj/item/reagent_containers/food/drinks/bottle/oiljug = TRADER_THIS_TYPE,
+								/obj/item/reagent_containers/food/snacks/grown/ambrosiadeus     = TRADER_THIS_TYPE,
+								/obj/item/reagent_containers/food/drinks/bottle/oiljug          = TRADER_THIS_TYPE,
 								/obj/item/device/scanner/reagent           = TRADER_ALL,
 								/obj/item/stack/medical/advanced           = TRADER_ALL,
 								)
@@ -269,6 +275,7 @@ Sells devices, odds and ends, and medical stuff
 /datum/trader/ship/robots
 	name = "Роботехник"
 	name_language = TRADER_DEFAULT_NAME
+	skill_req = SKILL_DEVICES
 	origin = "Магазин Роботов"
 	possible_origins = list("ИскИн здорового человека", "Механические Друзья", "Бот-Чоп-Шоп", "Производственная баржа ОМНИ")
 	possible_trading_items = list(
@@ -303,6 +310,7 @@ Sells devices, odds and ends, and medical stuff
 /datum/trader/xeno_shop
 	name = "Коллекционер Ксенофауны"
 	origin = "СТС 'Не браконьер'"
+	skill_req = SKILL_SCIENCE
 	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY|TRADER_WANTED_ALL
 	possible_origins = list("Ксено-обнимашки", "Сборщик образцов корпорации 'Xynergy'", "Реселлер животных", "Отдел восстановления 'NanoTrasen '", "Пет-шоп одинокого Пита","Магазин Кузины Вей")
 	speech = list(TRADER_HAIL_GENERIC    = "Добро пожаловать! У вас есть что предложить нам?.",
@@ -338,6 +346,7 @@ Sells devices, odds and ends, and medical stuff
 /datum/trader/medical
 	name = "Поставщик Медицины"
 	origin = "Лазарет СТС 'Неподчинённый'"
+	skill_req = SKILL_MEDICAL
 	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY
 	want_multiplier = 1.2
 	margin = 2
@@ -353,7 +362,7 @@ Sells devices, odds and ends, and medical stuff
 				TRADER_WHAT_WANT         = "Слушай, мне бы действительно не помешало немного...",
 
 				TRADER_COMPLEMENT_FAILURE   = "Ха-ха, как мило с твоей стороны. Почему бы тебе не пойти и грохнуться в лифтовую шахту?.",
-				TRADER_COMPLEMENT_SUCCESS = "Слушай, ты всегда можешь пригласить мен на свидание в нерабочее время.",
+				TRADER_COMPLEMENT_SUCCESS = "Слушай, ты всегда можешь пригласить меня на свидание в нерабочее время.",
 				TRADER_INSULT_GOOD       = "Воу, приятель, обязательно быть ТАКИМ грубым? Я же девушка, всё-таки.",
 				TRADER_INSULT_BAD        = "*приглушённый смех* Прости, кажется, я должна была оскорбиться?",
 				)
@@ -394,6 +403,7 @@ Sells devices, odds and ends, and medical stuff
 
 /datum/trader/medical/chem
 	name = "Поставщик Химикатов"
+	skill_req = SKILL_CHEMISTRY
 	origin = "Абсолютно легальная медицина (Возврату не подлежит)"
 	possible_origins = list("Корпорация Ток-Хем", "PH International", "Группа Вагнера", "Абсолютно легальная медицина (Возврату не подлежит)")
 

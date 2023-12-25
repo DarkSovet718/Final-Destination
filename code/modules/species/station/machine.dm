@@ -33,8 +33,8 @@
 	passive_temp_gain = 5  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
-	appearance_flags = HAS_HAIR_COLOR | HAS_UNDERWEAR | HAS_EYE_COLOR //IPCs can wear undies too :(
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_NO_FBP_CONSTRUCTION
+	appearance_flags = HAS_HAIR_COLOR | HAS_UNDERWEAR //IPCs can wear undies too :(
 
 	blood_color = "#1f181f"
 	flesh_color = "#575757"
@@ -52,10 +52,22 @@
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(
-			CULTURE_POSITRONICS
+			CULTURE_HUMAN_MARTIAN,
+			CULTURE_HUMAN_MARSTUN,
+			CULTURE_HUMAN_LUNAPOOR,
+			CULTURE_HUMAN_LUNARICH,
+			CULTURE_HUMAN_VENUSIAN,
+			CULTURE_HUMAN_VENUSLOW,
+			CULTURE_HUMAN_BELTER,
+			CULTURE_HUMAN_PLUTO,
+			CULTURE_HUMAN_EARTH,
+			CULTURE_HUMAN_CETI,
+			CULTURE_HUMAN_SPACER,
+			CULTURE_HUMAN_SPAFRO,
+			CULTURE_HUMAN_OTHER
 		),
 		TAG_HOMEWORLD = list(
-			HOME_SYSTEM_ROOT,
+			HOME_SYSTEM_ERIDANI,
 			HOME_SYSTEM_EARTH,
 			HOME_SYSTEM_LUNA,
 			HOME_SYSTEM_MARS,
@@ -66,25 +78,20 @@
 			HOME_SYSTEM_OTHER
 		),
 		TAG_FACTION = list(
-			FACTION_POSITRONICS,
-			FACTION_SOL_CENTRAL,
-			FACTION_INDIE_CONFED,
-			FACTION_NANOTRASEN,
-			FACTION_FREETRADE,
-			FACTION_XYNERGY,
-			FACTION_FLEET,
-			FACTION_ARMY,
-			FACTION_SPACECOPS,
-			FACTION_EXPEDITIONARY,
-			FACTION_INDIE_CONFED,
-			FACTION_OTHER
+			FACTION_POSITRONICS_FIRSTGEN,
+			FACTION_POSITRONICS_SECONDGEN_OWNED,
+			FACTION_POSITRONICS_SECONDGEN_FREE,
+			FACTION_POSITRONICS_SECONDGEN_UNION,
+			FACTION_POSITRONICS_THIRDGEN_PRIVATELY,
+			FACTION_POSITRONICS_THIRDGEN_CORPORATE,
+			FACTION_POSITRONICS_THIRDGEN_STATE
 		)
 	)
 
 	default_cultural_info = list(
-		TAG_CULTURE = CULTURE_POSITRONICS,
-		TAG_HOMEWORLD = HOME_SYSTEM_ROOT,
-		TAG_FACTION = FACTION_POSITRONICS
+		TAG_CULTURE = CULTURE_HUMAN_LUNARICH,
+		TAG_HOMEWORLD = HOME_SYSTEM_ERIDANI,
+		TAG_FACTION = FACTION_POSITRONICS_THIRDGEN_STATE
 	)
 
 	exertion_effect_chance = 10
@@ -93,6 +100,15 @@
 		/decl/emote/exertion/synthetic,
 		/decl/emote/exertion/synthetic/creak
 	)
+
+	species_bonus = 12
+
+/datum/species/machine/skills_from_age(age)
+	. = 0
+
+/datum/species/machine/check_background(var/datum/job/job, var/datum/preferences/prefs)
+	var/decl/cultural_info/faction/positronic/gen = SSculture.get_culture(prefs.cultural_info[TAG_FACTION])
+	. = istype(gen) ? (job.type in gen.valid_jobs) : ..()
 
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)
 	..()

@@ -68,17 +68,9 @@
 	spawn(20) if(!QDELETED(src)) set_opacity(0)
 
 /obj/machinery/shield/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			if (prob(75))
-				qdel(src)
-		if(2.0)
-			if (prob(50))
-				qdel(src)
-		if(3.0)
-			if (prob(25))
-				qdel(src)
-	return
+	if(prob(severity/50))
+		qdel(src)
+		return
 
 /obj/machinery/shield/emp_act(severity)
 	switch(severity)
@@ -218,25 +210,17 @@
 		src.malfunction = 1
 	if(health <= 0)
 		spawn(0)
-			explosion(get_turf(src.loc), 1, EX_ACT_LIGHT, 0, 0)
+			cell_explosion(get_turf(loc), 50, 50)
 		qdel(src)
 	update_icon()
 	return
 
 /obj/machinery/shieldgen/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			src.health -= 75
-			src.checkhp()
-		if(2.0)
-			src.health -= 30
-			if (prob(15))
-				src.malfunction = 1
-			src.checkhp()
-		if(3.0)
-			src.health -= 10
-			src.checkhp()
-	return
+	health -= severity
+	checkhp()
+	if(prob(15))
+		malfunction = 1
+	checkhp()
 
 /obj/machinery/shieldgen/emp_act(severity)
 	switch(severity)

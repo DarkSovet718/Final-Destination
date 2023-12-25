@@ -163,9 +163,9 @@
  */
 /atom/proc/damage_health(damage, damage_type = null, damage_flags, severity)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
+	if(!health_max)
 		return
-	if (!can_damage_health(damage, damage_type))
+	if(!can_damage_health(damage, damage_type))
 		return FALSE
 
 	// Apply resistance/weakness modifiers
@@ -297,22 +297,21 @@
 	// Generalized - 75-125 damage at max, 38-63 at medium, 25-42 at minimum severities.
 	damage_health(rand(75, 125) / severity, DAMAGE_EMP, severity = severity)
 
-
-/atom/ex_act(severity, turf_breaker)
-	..()
+/atom/proc/ex_act(severity, direction)
 	// No hitsound here to avoid noise spam.
 	// Damage is based on severity and maximum health, with DEVASTATING being guaranteed death without any resistances.
-	var/damage_flags = turf_breaker ? DAMAGE_FLAG_TURF_BREAKER : EMPTY_BITFIELD
-	var/damage = 0
-	switch (severity)
-		if (EX_ACT_DEVASTATING)
-			damage = health_max
-		if (EX_ACT_HEAVY)
-			damage = round(health_max / rand(2, 3))
-		if (EX_ACT_LIGHT)
-			damage = round(health_max / rand(10, 15))
-	if (damage && can_damage_health(damage, DAMAGE_EXPLODE))
-		damage_health(damage, DAMAGE_EXPLODE, damage_flags, severity)
+	if(severity && can_damage_health(severity, DAMAGE_EXPLODE))
+		damage_health(severity, DAMAGE_EXPLODE, EMPTY_BITFIELD, severity)
+		contents_explosion(severity, direction)
+
+	explosion_throw(severity, direction)
+
+/atom/proc/explosion_throw(severity, direction, scatter_multiplier = 1)
+	return
+
+/atom/proc/contents_explosion(severity, direction)
+	for(var/atom/A in contents)
+		A.ex_act(severity, direction)
 
 /atom/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	..()

@@ -11,12 +11,6 @@
 
 /turf/unsimulated/floor/exoplanet/New()
 
-//yeah this is stupid and you can cry about it
-	if(istype(src.loc,/area/jplanet/outdoors))
-		set_light(0.7, 1, 5, l_color = "#cc9440")
-	if(istype(src.loc,/area/jplanet/outdoors/water))
-		set_light(0.7, 1, 5, l_color = "#6fb45c")
-
 	if(GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 
@@ -66,15 +60,8 @@
 		..()
 
 /turf/unsimulated/floor/exoplanet/ex_act(severity)
-	switch(severity)
-		if(1)
-			melt()
-		if(2)
-			if(prob(40))
-				melt()
-		if(3)
-			if(prob(10))
-				melt()
+	if(prob(severity/50))
+		melt()
 
 /turf/unsimulated/floor/exoplanet/Initialize()
 	. = ..()

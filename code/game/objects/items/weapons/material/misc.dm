@@ -15,7 +15,8 @@
 	throw_speed = 6
 	var/spent
 	worth_multiplier = 15
-
+	have_stances = TRUE
+	melee_strikes = list(/datum/melee_strike/swipe_strike/polearm_mixed)
 
 /obj/item/material/harpoon/bomb
 	name = "explosive harpoon"
@@ -33,8 +34,8 @@
 /obj/item/material/harpoon/bomb/proc/harpoon_detonate()
 	audible_message(SPAN_DANGER("\The [src] detonates!")) //an actual sound will be handled by explosion()
 	var/turf/T = get_turf(src)
-	explosion(T, 2, EX_ACT_LIGHT, 1, UP|DOWN, 1)
-	fragmentate(T, 4, 2)
+	cell_explosion(T, 200, 100)
+	fragmentate(T, 4, 2, shoot_from = name)
 	handle_afterbomb()
 
 /obj/item/material/harpoon/bomb/proc/handle_afterbomb()
@@ -63,6 +64,10 @@
 	attack_verb = list("chopped", "torn", "cut")
 	applies_material_colour = 0
 	hitsound = "chop"
+	have_stances = TRUE
+	fail_chance = 20
+	lunge_dist = 2
+	melee_strikes = list(/datum/melee_strike/precise_strike/fast_attacks)
 
 /obj/item/material/hatchet/unbreakable
 	unbreakable = TRUE
@@ -79,6 +84,9 @@
 	attack_cooldown_modifier = 1
 	max_force = 20
 	force_multiplier = 0.2
+	lunge_dist = 4
+	fail_chance = 40
+	melee_strikes = list(/datum/melee_strike/precise_strike/fast_attacks,/datum/melee_strike/swipe_strike/mixed_combo)
 
 /obj/item/material/hatchet/machete/unbreakable
 	unbreakable = TRUE
@@ -134,6 +142,9 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 2)
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
 	worth_multiplier = 20
+	fail_chance = 70
+	have_stances = TRUE
+	melee_strikes = list(/datum/melee_strike/swipe_strike/polearm_mixed,/datum/melee_strike/swipe_strike/polearm_slash)
 
 
 /obj/item/material/cross

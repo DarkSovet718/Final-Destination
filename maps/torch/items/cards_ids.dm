@@ -187,14 +187,14 @@
 
 /obj/item/card/id/torch/crew/research/scientist
 	job_access_type = /datum/job/scientist
-/*
+
 /obj/item/card/id/torch/crew/research/research_guard
 	job_access_type = /datum/job/research_guard
-*/
+
 //NanoTrasen and Passengers
 
 /obj/item/card/id/torch/passenger
-	desc = "A card issued to passengers aboard the SEV Torch."
+	desc = "A card issued to passengers and off-duty personnel aboard the SEV Torch."
 	job_access_type = DEFAULT_JOB_TYPE
 	detail_color = COLOR_PAKISTAN_GREEN
 
@@ -230,12 +230,3 @@
 	job_access_type = /datum/job/merchant
 	color = COLOR_OFF_WHITE
 	detail_color = COLOR_BEIGE
-
-/obj/item/card/id/torch/gold/synth
-	name = "identification card"
-	desc = "A green card given to experimantal EXO's synthetic assistants."
-	item_state = "silver_id"
-	assignment = "Synthetic"
-	color = COLOR_BOTTLE_GREEN
-	detail_color = COLOR_OFF_WHITE
-	job_access_type = /datum/job/captain

@@ -257,7 +257,7 @@
 
 	// Effect 4: Medium scale explosion
 	spawn(0)
-		explosion(TS, explosion_power * 3.5, effective = /datum/effect/effect/system/explosion/warp)
+		cell_explosion(TS, explosion_power * 3.5 * 50, 50, effective = /datum/effect/effect/system/explosion/warp)
 		qdel(src)
 
 /obj/machinery/power/supermatter/examine(mob/user)
@@ -583,13 +583,7 @@
 
 /obj/machinery/power/supermatter/ex_act(var/severity)
 	..()
-	switch(severity)
-		if(1.0)
-			power *= 4
-		if(2.0)
-			power *= 3
-		if(3.0)
-			power *= 2
+	power += severity
 	log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power].")
 
 /obj/machinery/power/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.

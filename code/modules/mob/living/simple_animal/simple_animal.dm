@@ -190,18 +190,7 @@
 	if(!blinded)
 		flash_eyes()
 
-	var/damage
-	switch (severity)
-		if (1)
-			damage = 500
-
-		if (2)
-			damage = 120
-
-		if(3)
-			damage = 30
-
-	apply_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
+	apply_damage(severity, BRUTE, damage_flags = DAM_EXPLODE)
 
 /mob/living/simple_animal/adjustBruteLoss(damage)
 	..()
@@ -374,3 +363,8 @@
 	else
 		visible_message(SPAN_NOTICE("\The [user] is interrupted."))
 		set_AI_busy(FALSE)
+
+/mob/living/simple_animal/damage_health(damage, damage_type = null, damage_flags, severity)
+	. = ..()
+	if(damage_type == DAMAGE_EXPLODE && damage >= health && severity >= EXPLOSION_THRESHOLD_GIB)
+		gib()

@@ -66,18 +66,18 @@
 
 /obj/structure/bookcase/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(600 to INFINITY)
 			for(var/obj/item/book/b in contents)
 				qdel(b)
 			qdel(src)
 			return
-		if(2.0)
+		if(300 to 600)
 			for(var/obj/item/book/b in contents)
 				if (prob(50)) b.dropInto(loc)
 				else qdel(b)
 			qdel(src)
 			return
-		if(3.0)
+		if(150 to 300)
 			if (prob(50))
 				for(var/obj/item/book/b in contents)
 					b.dropInto(loc)
@@ -258,3 +258,12 @@
 				</body>
 			</html>
 			"}
+
+/obj/item/book/random //just empty books for design
+	name = "book"
+	icon_state ="book"
+
+/obj/item/book/random/New()
+	name = "[pick("old", "ancient", "strange", "normal", "note", "fancy", "memoirs")] book"
+	icon_state = pick("book", "book1", "book2", "book3", "book4", "book5", "book6", "book7")
+	..()

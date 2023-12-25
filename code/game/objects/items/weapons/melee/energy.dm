@@ -123,7 +123,7 @@
 	icon_state = "sword0"
 	active_force = 30
 	active_throwforce = 20
-	force = 3
+	force = 1
 	throwforce = 5
 	throw_speed = 1
 	throw_range = 5
@@ -136,6 +136,22 @@
 	active_attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
 	var/blade_color
+	fail_chance = 40
+	melee_strikes = list(/datum/melee_strike/swipe_strike/sword_slashes,/datum/melee_strike/swipe_strike/mixed_combo)
+
+/obj/item/melee/energy/sword/activate(mob/living/user)
+	. = ..()
+	lunge_dist = 4
+
+/obj/item/melee/energy/sword/deactivate(mob/living/user)
+	. = ..()
+	lunge_dist = 0
+
+/obj/item/melee/energy/sword/AltClick(mob/user)
+	if(have_stances)
+		swap_stances(user)
+
+	..()
 
 /obj/item/melee/energy/sword/Initialize()
 	if(!blade_color)
@@ -209,12 +225,22 @@
 	active_throwforce = 1  //Throwing or dropping the item deletes it.
 	throw_speed = 1
 	throw_range = 1
+	have_stances = TRUE
+	lunge_dist = 4
+	fail_chance = 60
+	melee_strikes = list(/datum/melee_strike/swipe_strike/sword_slashes,/datum/melee_strike/swipe_strike/mixed_combo)
 	w_class = ITEM_SIZE_TINY //technically it's just energy or something, I dunno
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 	active_attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
 	var/mob/living/creator
 	var/datum/effect/effect/system/spark_spread/spark_system
+
+/obj/item/melee/energy/blade/AltClick(mob/user)
+	if(have_stances)
+		swap_stances(user)
+
+	..()
 
 /obj/item/melee/energy/blade/New()
 	..()
@@ -288,12 +314,22 @@
 	active_force = 40
 	active_throwforce = 15
 	lighting_color = COLOR_ORANGE
-	force = 5
+	force = 15
 	throwforce = 2
+	lunge_dist = 3
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_MAGNET = 3)
 	active_attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
+	have_stances = TRUE
+	fail_chance = 70
+	melee_strikes = list(/datum/melee_strike/swipe_strike/sword_slashes,/datum/melee_strike/swipe_strike/mixed_combo)
+
+/obj/item/melee/energy/machete/sundowner/AltClick(mob/user)
+	if(have_stances)
+		swap_stances(user)
+
+	..()
 
 /obj/item/melee/energy/minuano
 	name = "high-frequency katana"
@@ -317,12 +353,22 @@
 	force = 20
 	throwforce = 10
 	armor_penetration = 0
+	lunge_dist = 4
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = list(TECH_COMBAT = 7, TECH_MATERIAL = 5, TECH_ENERGY = 5)
+	origin_tech = list(TECH_COMBAT = 7, TECH_MATERIAL = 5, TECH_POWER = 5)
 	active_attack_verb = list("attacked", "slash", "cleaved", "torn", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
 	slot_flags = SLOT_BELT
+	have_stances = TRUE
+	fail_chance = 70
+	melee_strikes = list(/datum/melee_strike/swipe_strike/sword_slashes,/datum/melee_strike/swipe_strike/mixed_combo)
 	base_parry_chance = 0
+
+/obj/item/melee/energy/minuano/AltClick(mob/user)
+	if(have_stances)
+		swap_stances(user)
+
+	..()
 
 /obj/item/melee/energy/minuano/proc/active()
 	if(active)

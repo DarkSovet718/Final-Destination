@@ -3,7 +3,7 @@
 	name = "explosive implant"
 	desc = "A military grade micro bio-explosive. Highly dangerous."
 	icon_state = "implant_evil"
-	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ESOTERIC = 3)
+	origin_tech = list(TECH_MATERIAL = 5, TECH_BIO = 2, TECH_ESOTERIC = 6)
 	hidden = 1
 	var/elevel
 	var/phrase
@@ -135,13 +135,13 @@
 					part.take_external_damage(60, used_weapon = "Explosion")
 				else
 					part.droplimb(0,DROPLIMB_BLUNT)
-			explosion(T, 2, EX_ACT_LIGHT)
+			cell_explosion(T, 200, 100)
 		if ("Destroy Body")
-			explosion(T, 1, EX_ACT_LIGHT)
+			cell_explosion(T, 200, 200)
 			if(ismob(imp_in))
 				imp_in.gib()
 		if ("Full Explosion")
-			explosion(T, 4, EX_ACT_HEAVY)
+			cell_explosion(T, 400, 100)
 			if(ismob(imp_in))
 				imp_in.gib()
 	qdel(src)

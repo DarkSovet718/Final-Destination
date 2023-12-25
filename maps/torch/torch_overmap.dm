@@ -1,6 +1,6 @@
 /obj/effect/overmap/visitable/ship/torch
 	name = "SEV Torch"
-	desc = "A frankensteined HNS Mako-class corvette, broadcasting SCGEC codes and the designation \"SEV Torch, HSC-4-13-X\"."
+	desc = "This is a frigate, broadcasting SCGEC codes and the designation \"SEV Torch, HSC-4-13-X\"."
 	fore_dir = WEST
 	dir = WEST
 	vessel_mass = 100000
@@ -185,6 +185,12 @@
 
 	for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
 		H.add_known_sector(R)
+	add_starter_trader()
+
+/obj/effect/overmap/visitable/ship/torch/proc/add_starter_trader()
+	var/trader_type = /datum/trader/trading_beacon/starter
+	GLOB.traders[trader_type] = new trader_type
+	GLOB.trader_types += trader_type
 
 /obj/effect/overmap/visitable/sector/residue
 	name = "Bluespace Residue"

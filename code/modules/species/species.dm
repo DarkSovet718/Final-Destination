@@ -267,6 +267,8 @@
 	var/list/exertion_emotes_biological = null
 	var/list/exertion_emotes_synthetic = null
 
+	var/species_bonus = 6
+
 /*
 These are all the things that can be adjusted for equipping stuff and
 each one can be in the NORTH, SOUTH, EAST, and WEST direction. Specify
@@ -355,11 +357,11 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 /datum/species/proc/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	if(istype(H.get_equipped_item(slot_back), /obj/item/storage/backpack))
-		if (extendedtank)	H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(H.back), slot_in_backpack)
-		else	H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H.back), slot_in_backpack)
+		if (extendedtank)	H.equip_to_storage_or_drop(new /obj/item/storage/box/engineer)
+		else				H.equip_to_storage_or_drop(new /obj/item/storage/box/survival)
 	else
 		if (extendedtank)	H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(H), slot_r_hand)
-		else	H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H), slot_r_hand)
+		else				H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H), slot_r_hand)
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 
@@ -822,9 +824,10 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 /datum/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)
 		if(0 to 22) 	. = 0
-		if(23 to 30) 	. = 3
+		if(23 to 30) 	. = 4
 		if(31 to 45)	. = 6
-		else			. = 8
+		if(46 to 65)	. = 3
+		else			. = -2
 
 /datum/species/proc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	return

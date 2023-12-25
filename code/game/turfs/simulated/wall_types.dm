@@ -19,6 +19,36 @@
 	initial_gas = list("nitrogen" = 101.38)
 	color = COLOR_GREEN_GRAY
 
+/turf/simulated/wall/r_wall/invincible //invincible
+	icon_state = "r_invinsible"
+	floor_type = /turf/simulated/floor/reinforced
+	desc = "A huge chunk of metal used to separate rooms. This one looks very durable."
+
+/turf/simulated/wall/r_wall/invincible/prepainted
+	paint_color = COLOR_GUNMETAL
+
+/turf/simulated/wall/r_wall/invincible/New(var/newloc)
+	..(newloc, MATERIAL_PLASTEEL,MATERIAL_TITANIUM)
+
+/turf/simulated/wall/r_wall/invincible/bullet_act()
+	return
+
+/turf/simulated/wall/r_wall/invincible/can_damage_health()
+	SHOULD_CALL_PARENT(FALSE)
+	return FALSE
+
+/turf/simulated/wall/r_wall/invincible/attack_hand()
+	return
+
+/turf/simulated/wall/r_wall/invincible/attackby()
+	return
+
+/turf/simulated/wall/r_wall/invincible/ex_act()
+	return
+
+/turf/simulated/wall/r_wall/invincible/hitby()
+	return
+
 /turf/simulated/wall/prepainted
 	paint_color = COLOR_WALL_GUNMETAL
 /turf/simulated/wall/r_wall/prepainted

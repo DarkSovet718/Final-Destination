@@ -237,8 +237,8 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 /obj/effect/overmap/visitable/ship/proc/go_boom_overmap()
 	adjust_speed(-speed[1], -speed[2])
 	halted = 1
-	icon_state = "ship_exploding"
-	spawn(45) icon_state = "ship_exploded"
+	icon_state = "[icon_state]_exploding"
+	spawn(45) icon_state = "[icon_state]_exploded"
 
 /obj/effect/overmap/visitable/ship/proc/go_boom()
 	set waitfor = 0
@@ -262,7 +262,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 		sleep(rand(6,12))
 		var/area/finalarea = pick(boomareas)
 		var/turf/targetturf = pick_area_turf(finalarea.type, list(/proc/is_not_space_turf))
-		explosion(targetturf, rand(12,24), EX_ACT_HEAVY, adminlog = 0)
+		cell_explosion(targetturf, rand(500,1000), 100)
 		for(var/mob/M in GLOB.player_list)
 			var/turf/T = get_turf(M)
 			if(!T || !(T.z in map_z))

@@ -25,14 +25,14 @@
 		distance++
 		if(T.density)
 			if(distance < 7)
-				explosion(T, 6, turf_breaker = TRUE)
+				cell_explosion(T, 200, 50)
 				continue
 			else
 				T.ex_act(1)
 		for(var/atom/A in T)
 			if(A.density)
 				if(distance < 7)
-					explosion(T, 6, turf_breaker = TRUE)
+					cell_explosion(T, 200, 50)
 					if(A)
 						A.Destroy()
 					continue
@@ -75,7 +75,7 @@
 
 	//Some moron disregarded the cooldown warning. Let's blow in their face.
 	if(prob(cool_failchance()))
-		explosion(middle, rand(6, 9))
+		cell_explosion(middle, rand(200, 400), 75)
 	next_shot = coolinterval + world.time
 
 	var/turf/targetrange = get_turf(linked)
@@ -108,6 +108,10 @@
 			var/obj/effect/overmap/event/nebula/N = new /obj/effect/overmap/event/nebula(targetrange)
 			N.name = "temporary bluespace nebula"
 			QDEL_IN(N, rand(1 MINUTES, 3 MINUTES))
+		if(chargetype == OVERMAP_WEAKNESS_WORM)
+			var/obj/effect/overmap/event/gravity/danger/S = new /obj/effect/overmap/event/gravity/danger(targetrange)
+			S.name = "unstable wormhole"
+			QDEL_IN(S, rand(1 MINUTES, 2 MINUTES))
 		return TRUE
 
 	var/obj/effect/overmap/finaltarget = pick(candidates)

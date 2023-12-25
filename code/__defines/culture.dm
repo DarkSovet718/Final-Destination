@@ -148,11 +148,16 @@
 #define RELIGION_VOX_FORCE     "Kritika, The Unrelenting Force"
 
 // IPC cultures.
-#define CULTURE_POSITRONICS    "Union Member"
 
-#define HOME_SYSTEM_ROOT       "Root"
+#define HOME_SYSTEM_ERIDANI       "Themis"
 
-#define FACTION_POSITRONICS    "Positronic Union"
+#define FACTION_POSITRONICS_FIRSTGEN			"First Gen - Owned"
+#define FACTION_POSITRONICS_SECONDGEN_OWNED		"Second Gen - Owned"
+#define FACTION_POSITRONICS_SECONDGEN_FREE		"Second Gen - Free Resident"
+#define FACTION_POSITRONICS_SECONDGEN_UNION		"Second Gen - Union Citizen"
+#define FACTION_POSITRONICS_THIRDGEN_PRIVATELY	"Third Gen - Privately Owned"
+#define FACTION_POSITRONICS_THIRDGEN_CORPORATE	"Third Gen - Corporate Owned"
+#define FACTION_POSITRONICS_THIRDGEN_STATE		"Third Gen - State Owned"
 
 // Diona cultures.
 #define CULTURE_DIONA          "Diona Chorus"
@@ -216,13 +221,16 @@
 
 // Resomi cultures.
 
-#define CULTURE_RESOMI_TRIBE     		"Alish, Tribe Comonner"
-#define CULTURE_RESOMI_CONCORD    		"Alish, Child of Concord"
-#define CULTURE_RESOMI_SPACER 			"Spacer, Imperial Refugee"
+#define CULTURE_RESOMI_TEMALI     		"Alish, Temali Tribes"
+#define CULTURE_RESOMI_SHAYAMI    		"Alish, Shayami Tribes"
+#define CULTURE_RESOMI_SHOSHONI    		"Alish, Shoshoni Tribes"
+#define CULTURE_RESOMI_ATARI    		"Alish, Atari Tribes"
+#define CULTURE_RESOMI_OTHER    		"Alish, Other Tribes"
+#define CULTURE_RESOMI_SPACER 			"Spacer, Independent"
 
 #define FACTION_RESOMI_CONCORD			"Concord"
 #define FACTION_RESOMI_EXPEDITIONARY 	"Expeditionary Corps"
-#define FACTION_RESOMI_URI				"United Resomi Empire"
-#define FACTION_RESOMI_REFUGEE			"Independent"
+#define FACTION_RESOMI_URE				"United Resomi Empire"
+#define FACTION_RESOMI_INDEPENDENT		"Independent"
 
 #define HOME_SYSTEM_RESOMI_ALISH      	"Alish"

@@ -19,7 +19,12 @@
 		fingerprint = md5(H.dna.uni_identity)
 	else
 		fingerprint = "N/A"
-	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species()]\nGender: [gender2text(H.gender)]\nAge: [H.age]\nPlace of Birth: [pob]\nFingerprint: [fingerprint]"
+
+	var/psi
+	if(H.client?.prefs?.psi_threat_level && H.client.prefs.psi_openness)
+		psi  = "Psionics status: [GLOB.psistatus2text[H.client.prefs.psi_status]]\n"
+		psi += "Psionics threat level: [H.client.prefs.psi_threat_level]\n"
+	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species()]\nGender: [gender2text(H.gender)]\nAge: [H.age]\n[psi]Place of Birth: [pob]\nFingerprint: [fingerprint]"
 
 /obj/item/passport/attack_self(mob/user as mob)
 	user.visible_message(
@@ -85,30 +90,30 @@
 	icon_state = "passport_scg2"
 	desc = "A passport from Ceti Epsilon, within Sol Central Government space."
 
-/obj/item/passport/lordania
-	name = "\improper Lordanian passport"
+/obj/item/passport/iolaus
+	name = "\improper Iolaus passport"
 	icon_state = "passport_scg2"
-	desc = "A passport from Lordania, within Sol Central Government space."
+	desc = "A passport from Iolaus, within Sol Central Government space."
 
-/obj/item/passport/kingston
-	name = "\improper Kingstonian passport"
+/obj/item/passport/pirx
+	name = "\improper Pirx passport"
 	icon_state = "passport_scg2"
-	desc = "A passport from Kingston, within Sol Central Government space."
+	desc = "A passport from Pirx, within Sol Central Government space."
 
-/obj/item/passport/cinu
-	name = "\improper Cinusian passport"
+/obj/item/passport/tadmor
+	name = "\improper Tadmor passport"
 	icon_state = "passport_scg2"
-	desc = "A passport from Cinu, within Sol Central Government space."
+	desc = "A passport from Tadmor, within Sol Central Government space."
 
-/obj/item/passport/yuklid
-	name = "\improper Yuklid V passport"
+/obj/item/passport/brahe
+	name = "\improper Brahe passport"
 	icon_state = "passport_scg2"
-	desc = "A passport from Yuklid V, within Sol Central Government space."
+	desc = "A passport from Brahe, within Sol Central Government space."
 
-/obj/item/passport/lorriman
-	name = "\improper Lorriman passport"
+/obj/item/passport/saffar
+	name = "\improper Saffar passport"
 	icon_state = "passport_scg2"
-	desc = "A passport from Yuklid V, within Sol Central Government space."
+	desc = "A passport from Saffar, within Sol Central Government space."
 
 /obj/item/passport/south_gaia
 	name = "\improper Southern Gaian passport"
@@ -144,6 +149,11 @@
 	name = "\improper Magnitkan passport"
 	icon_state = "passport"
 	desc = "A passport from Magnitka, an independant colony."
+
+/obj/item/passport/meotourne
+	name = "\improper Meotourne Passport"
+	icon_state = "passport"
+	desc = "A passport from Meotourne, an independent colony. All text dubbed in French."
 
 /obj/item/passport/empiremohranda
 	name = "\improper Mohrandade passport"

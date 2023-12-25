@@ -202,6 +202,14 @@
 	lightbulb.set_color(color)
 	queue_icon_update()
 
+/obj/machinery/light/blue
+	color = "#4f7fad"
+	light_type = /obj/item/light/tube/blue
+
+/obj/machinery/light/golden
+	color = "#f1d57f"
+	light_type = /obj/item/light/tube/golden
+
 // the smaller bulb light fixture
 /obj/machinery/light/small
 	icon_state = "bulb_map"
@@ -593,13 +601,13 @@
 // destroy the whole light fixture or just shatter it
 /obj/machinery/light/ex_act(severity)
 	switch(severity)
-		if(1)
+		if(600 to INFINITY)
 			qdel(src)
 			return
-		if(2)
+		if(300 to 600)
 			if (prob(75))
 				broken()
-		if(3)
+		if(150 to 300)
 			if (prob(50))
 				broken()
 
@@ -725,6 +733,18 @@
 		LIGHTMODE_EMERGENCY = list(l_outer_range = 4, l_max_bright = 1, l_color = LIGHT_COLOUR_E_RED),
 	)
 	sound_on = 'sound/machines/lightson.ogg'
+
+/obj/item/light/tube/blue
+	name = "light tube (blue)"
+	color = COLOR_BLUE_GRAY
+	b_colour = COLOR_BLUE_GRAY
+	random_tone = FALSE
+
+/obj/item/light/tube/golden
+	name = "light tube (golden)"
+	color = COLOR_YELLOW_GRAY
+	b_colour = COLOR_YELLOW_GRAY
+	random_tone = FALSE
 
 /obj/item/light/tube/warm
 	name = "light tube (warm)"
@@ -911,7 +931,7 @@
 			log_and_message_admins("Rigged light explosion, last touched by [fingerprintslast]")
 			var/turf/T = get_turf(loc)
 			set_status(LIGHT_BROKEN)
-			addtimer(CALLBACK(src, .proc/explosion, T, 3, EX_ACT_LIGHT), 2)
+			addtimer(CALLBACK(src, .proc/cell_explosion, T, 50, 10), 2)
 		else
 			visible_message(SPAN_WARNING("\The [src] short-circuits as something burns out its filament!"))
 			set_status(LIGHT_BURNED)

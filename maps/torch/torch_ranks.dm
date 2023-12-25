@@ -75,6 +75,9 @@
 				/datum/mil_rank/fleet/e5,
 				/datum/mil_rank/fleet/e6,
 				/datum/mil_rank/fleet/e7,
+				/datum/mil_rank/fleet/e8,
+				/datum/mil_rank/fleet/e9_alt1,
+				/datum/mil_rank/fleet/e9,
 				/datum/mil_rank/fleet/o1
 			),
 			/datum/mil_branch/army = list(
@@ -177,6 +180,7 @@
 		/datum/mil_rank/fleet/e9_alt2,
 		/datum/mil_rank/fleet/e9_alt3,
 		/datum/mil_rank/fleet/e9_alt4,
+		/datum/mil_rank/fleet/o0,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o3,
@@ -200,6 +204,7 @@
 		/datum/mil_rank/fleet/e8,
 		/datum/mil_rank/fleet/e9,
 		/datum/mil_rank/fleet/e9_alt1,
+		/datum/mil_rank/fleet/o0,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o3,
@@ -278,15 +283,15 @@
 	rank_types = list(
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/synthetic,
-		/datum/mil_rank/civ/exo_synth
 	)
 
 	spawn_rank_types = list(
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/synthetic,
-		/datum/mil_rank/civ/exo_synth
 	)
 
 /datum/mil_branch/solgov
@@ -410,6 +415,11 @@
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e9_alt4, /obj/item/clothing/accessory/solgov/specialty/enlisted)
 	sort_order = 9
 
+/datum/mil_rank/fleet/o0
+	name = "Cadet"
+	name_short = "CAD"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/cadet)
+	sort_order = 11
 /datum/mil_rank/fleet/o1
 	name = "Ensign"
 	name_short = "ENS"
@@ -718,14 +728,9 @@
 	name = "Synthetic"
 	name_short = "Synth"
 
-/datum/mil_rank/civ/exo_synth
-	name = "EXO Synthetic"
-	name_short = "Synth"
-	accessory = list(/obj/item/clothing/accessory/badge/solgov/synthetic)
-
-/datum/mil_rank/civ/exo_synth
-	name = "EXO Synthetic"
-	accessory = list(/obj/item/clothing/accessory/badge/solgov/synthetic)
+/datum/mil_rank/civ/offduty
+	name = "Off-Duty Personnel"
+	name_short = "Off-Duty"
 
 /*
  *  SolGov Employees

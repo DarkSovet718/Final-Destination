@@ -62,8 +62,7 @@
 	chargedesc = "INDARRA"
 
 /obj/structure/ship_munition/disperser_charge/explosive/fire(turf/target, strength, range)
-	var/explosion_range = max(1, strength * 3)
-	explosion(target, explosion_range)
+	cell_explosion(target, max(1, strength * 3) * 75, 75)
 
 /obj/structure/ship_munition/disperser_charge/bluespace
 	name = "BS5-RAZLOM charge"
@@ -81,3 +80,13 @@
 			s.set_up(3, 1, get_turf(L))
 			s.start()
 			L.forceMove(T)
+
+/obj/structure/ship_munition/disperser_charge/wormhole
+	name = "pulsing charge"
+	color = "#59186b"
+	desc = "An unknown charge to power the obstruction field disperser with. It emits some kind of pulsation from side to side."
+	chargetype = OVERMAP_WEAKNESS_WORM
+	chargedesc = "UNKNOWN"
+
+/obj/structure/ship_munition/disperser_charge/wormhole/fire(turf/target, strength, range)
+	empulse(target, strength, strength * 2)

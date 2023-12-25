@@ -147,14 +147,20 @@
 	#include "z1_admin.dmm"
 	#include "z2_transit.dmm"
 
+//	#include "300x300_placeholder.dmm"
+
 	#include "../away/empty.dmm"
+	#include "../away/small_away/small_away.dm"
 	#include "../away/shade/_mining.dm"
 	#include "../away/mining/mining.dm"
 	#include "../away/derelict/derelict.dm"
 	#include "../away/bearcat/bearcat.dm"
 	#include "../away/ascent/ascent.dm"
 	#include "../away/ares/_ares.dm"
+	#include "../away/foodcart/_foodcart.dm"
 	#include "../away/aegis/aegis.dm"
+	#include "../away/aaaa_event/aegis_alt/aegis_alt.dm"
+	#include "../away/aaaa_event/observation_station/station.dm"
 	#include "../away/ascent_caulship/_ascent_caulship.dm"
 	#include "../away/ascent_corvette/_corvette.dm"
 	#include "../away/ascent_auto/auto.dm"
@@ -169,12 +175,15 @@
 	#include "../away/magshield/magshield.dm"
 	#include "../away/casino/casino.dm"
 	#include "../away/yacht/yacht.dm"
+	#include "../away/yacht2/yacht2.dm"
+	#include "../away/tradership/tradership.dm"
 	#include "../away/venera/venera.dm"
 	#include "../away/venera_a/venera_a.dm"
 	#include "../away/blueriver/blueriver.dm"
 	#include "../away/slavers/slavers_base.dm"
 	#include "../away/mobius_rift/mobius_rift.dm"
 	#include "../away/errant_pisces/errant_pisces.dm"
+	#include "../away/facility/facility.dm"
 	#include "../away/lar_maria/lar_maria.dm"
 	#include "../away/voxship/voxship.dm"
 	#include "../away/skrellscoutship/skrellscoutship.dm"
@@ -196,7 +205,11 @@
 	#include "../away/itv_providence/providence.dm"
 	#include "../away/drone_carrier/carrier.dm"
 	#include "../away/junk_planet/jplanet.dm"
+	#include "../away/undersea/code_stuff.dm"
 	#include "../away/ecoffice/ecoffice.dm"
+
+//alternative future stuff
+	#include "../away/airfield/airfield.dm"
 
 	#define using_map_DATUM /datum/map/torch
 

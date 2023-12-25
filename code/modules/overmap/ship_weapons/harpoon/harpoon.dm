@@ -1,17 +1,17 @@
 /obj/machinery/ship_weapon/front_part/harpoon_cannon
-	name = "harpoon cannon muzzle"
+	name = "IW-05 harpoon cannon muzzle"
 	desc = "An old-fashion harpoon cannon muzzle.\
 		<br>A sign on it reads: <i>STAY CLEAR! DO NOT BLOCK!</i>"
 	icon_state = "front"
 
 /obj/machinery/ship_weapon/middle_part/harpoon_cannon
-	name = "harpoon cannon rail"
+	name = "IW-05 harpoon cannon rail"
 	desc = "An old-fashion gas tube that propels munitions to the cannon muzzle. \
 		<br>A sign on it reads: <i>EXPLOSIVE! DO NOT OVERHEAT!</i>"
-	icon_state = "middle"
+	icon_state = "harpoon"
 
 /obj/machinery/ship_weapon/back_part/harpoon_cannon
-	name = "harpoon cannon munition rack"
+	name = "IW-05 harpoon cannon munition rack"
 	desc = "An old-fashion ammo reciever. Munition then goes to cannon rail."
 	icon_state = "back"
 
@@ -49,3 +49,7 @@
 		/obj/item/stock_parts/capacitor/super = 3,
 		/obj/item/stock_parts/manipulator/pico = 3
 	)
+
+/obj/item/stock_parts/circuitboard/harpoon/tele
+	name = T_BOARD("harpoon control telescreen")
+	build_path = /obj/machinery/computer/ship/ship_weapon/harpoon_gun/telescreen

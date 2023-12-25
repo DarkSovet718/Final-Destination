@@ -641,6 +641,19 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
 
+/obj/item/reagent_containers/food/snacks/chickenburger
+	name = "chickenburger"
+	desc = "For those, who appreciate bird flavour."
+	icon_state = "hburger"
+	filling_color = "#d63c3c"
+	center_of_mass = "x=16;y=11"
+	nutriment_desc = list("bun" = 2)
+	nutriment_amt = 3
+	bitesize = 2
+/obj/item/reagent_containers/food/snacks/chickenburger/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
+
 /obj/item/reagent_containers/food/snacks/plainburger
 	name = "burger"
 	desc = "The cornerstone of every nutritious breakfast."
@@ -3685,6 +3698,168 @@ obj/item/reagent_containers/food/snacks/jupiter
 	nutriment_desc = list("sweet" = 4, "vanilla?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/fruitsalad
+	name = "fruit salad"
+	icon_state = "fruitsalad"
+	desc = "Sweet-tasting juicy fresh fruit salad."
+	filling_color = "#8c0046"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("watermelon" = 4, "apple" = 2, "orange" = 2)
+	nutriment_amt = 6
+	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/fruitsalad/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/drink/juice/watermelon, 12)
+	reagents.add_reagent(/datum/reagent/drink/juice/apple, 6)
+	reagents.add_reagent(/datum/reagent/drink/juice/orange, 6)
+	reagents.add_reagent(/datum/reagent/drink/juice/lemon, 6)
+
+
+/obj/item/reagent_containers/food/snacks/junglesalad
+	name = "jungle salad"
+	icon_state = "junglesalad"
+	desc = "Sweet-tasting watery overfreshing salad."
+	filling_color = "#468c00"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("banana" = 3, "lemon" = 2, "apple" = 2)
+	nutriment_amt = 7
+	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/junglesalad/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/juice/banana, 8)
+	reagents.add_reagent(/datum/reagent/drink/juice/lemon, 9)
+	reagents.add_reagent(/datum/reagent/drink/juice/apple, 8)
+	reagents.add_reagent(/datum/reagent/drink/juice/watermelon, 12)
+
+
+/obj/item/reagent_containers/food/snacks/citrusdelight
+	name = "citrus delight"
+	icon_state = "citrusdelight"
+	desc = "A sour-sweet salad that oozes all over the plate."
+	filling_color = "#e6ffcc"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("orange" = 3, "sour" = 2, "lime" = 2)
+	nutriment_amt = 6
+	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/citrusdelight/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/juice/lemon, 6)
+	reagents.add_reagent(/datum/reagent/drink/juice/orange, 6)
+	reagents.add_reagent(/datum/reagent/drink/juice/lime, 6)
+
+
+/obj/item/reagent_containers/food/snacks/kale_salad
+	name = "kale salad"
+	icon_state = "kale_salad"
+	desc = "Green salad primarily made ot of cabbage."
+	filling_color = "#5ebb00"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("cabbage" = 3, "crunchy" = 2, "freshness" = 1)
+	nutriment_amt = 8
+	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/kale_salad/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/juice/cabbage, 9)
+	reagents.add_reagent(/datum/reagent/oliveoil, 5)
+	reagents.add_reagent(/datum/reagent/drink/juice/onion, 6)
+	reagents.add_reagent(/datum/reagent/drink/juice/carrot, 7)
+
+
+/obj/item/reagent_containers/food/snacks/greek_salad
+	name = "greek salad"
+	icon_state = "greek_salad"
+	desc = "Salad generally made with pieces of tomatoes, cucumbers, onion, feta cheese."
+	filling_color = "#5ebb00"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("tomato" = 2, "cheese" = 1, "olive oil" = 1)
+	nutriment_amt = 8
+	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/greek_salad/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/psilocybin, 3)
+	reagents.add_reagent(/datum/reagent/drink/juice/onion, 6)
+	reagents.add_reagent(/datum/reagent/drink/juice/tomato, 7)
+	reagents.add_reagent(/datum/reagent/oliveoil, 5)
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 1)
+
+
+/obj/item/reagent_containers/food/snacks/caesar_salad
+	name = "caesar salad"
+	icon_state = "caesar_salad"
+	desc = "A green salad of romaine lettuce and croutons dressed with lemon juice."
+	filling_color = "#b3ff66"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("freshness" = 2, "cabbage" = 1)
+	nutriment_amt = 8
+	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/caesar_salad/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/juice/cabbage, 9)
+	reagents.add_reagent(/datum/reagent/oliveoil, 5)
+	reagents.add_reagent(/datum/reagent/drink/juice/onion, 6)
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
+	reagents.add_reagent(/datum/reagent/nutriment/batter, 2)
+
+
+/obj/item/reagent_containers/food/snacks/spring_salad
+	name = "spring salad"
+	icon_state = "spring_salad"
+	desc = "Just a really great, elegant salad using spring vegetables: asparagus, snow peas, peas with baby cos lettuce and goats cheese."
+	filling_color = "#b3ff66"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("cabbage" = 3, "carrots" = 2)
+	nutriment_amt = 6
+	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/spring_salad/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/juice/cabbage, 10)
+	reagents.add_reagent(/datum/reagent/drink/juice/carrot, 7)
+	reagents.add_reagent(/datum/reagent/oliveoil, 5)
+
+
+/obj/item/reagent_containers/food/snacks/potato_salad
+	name = "potato salad"
+	icon_state = "potato_salad"
+	desc = "Potato salad made of boiled potatoes, containing a variety of other ingredients such as boiled eggs and raw vegetables"
+	filling_color = "#808c00"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("potato" = 4, "salt" = 2)
+	nutriment_amt = 10
+	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/potato_salad/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/juice/potato, 9)
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
+	reagents.add_reagent(/datum/reagent/drink/juice/onion, 4)
+	reagents.add_reagent(/datum/reagent/nutriment/mayo, 3)
+
+
+/obj/item/reagent_containers/food/snacks/antipasto_salad
+	name = "antipasto salad"
+	icon_state = "antipasto_salad"
+	desc = "Contains slices of meats, various fresh vegetables, olives, and cheese tossed in an olive oil"
+	filling_color = "#c07272"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("meat" = 4, "tomato" = 2, "salt" = 2)
+	nutriment_amt = 10
+	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/antipasto_salad/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/juice/cabbage, 10)
+	reagents.add_reagent(/datum/reagent/drink/juice/tomato, 8)
+	reagents.add_reagent(/datum/reagent/oliveoil, 5)
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 7)
+
 
 obj/item/reagent_containers/food/snacks/pluto
 	name = "plutonian rods"
